@@ -1,0 +1,21 @@
+.submit__button {
+  width: 376px;
+  height: 56px;
+  background-color: #7101ff;
+  border: none;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  transition: background-color 0.3s ease-out;
+  outline: none;
+}
+
+.submit__button:hover {
+  background-color: #5400d7;
+}
+
+.submit__button:active {
+  background-color: #4400b3;
+}

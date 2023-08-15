@@ -1,0 +1,35 @@
+.input__form {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+
+  .form__title {
+    color: black;
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 32px;
+    text-align: center;
+  }
+
+  .show__password_container {
+    display: flex;
+    gap: 18px;
+    height: 24px;
+    justify-content: flex-start;
+    align-items: center;
+
+    .show__password_button {
+      width: 20px;
+      height: 20px;
+      border: 1px solid #cad2d6;
+      border-radius: 1px;
+    }
+
+    .show__password_text {
+      font-weight: 500;
+      font-size: 14px;
+      line-height: 20px;
+      color: #505e68;
+    }
+  }
+}
