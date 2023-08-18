@@ -6,7 +6,11 @@ interface SubmitButtonProps {
 }
 
 const SubmitButton: React.FC<SubmitButtonProps> = ({ buttonText }) => {
-  return <button className={styles.submit__button}>{buttonText}</button>;
+  return (
+    <button className={styles.submit__button} type="submit">
+      {buttonText}
+    </button>
+  );
 };
 
 export default SubmitButton;

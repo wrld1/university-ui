@@ -1,0 +1,22 @@
+.show__password_container {
+  display: flex;
+  gap: 18px;
+  height: 24px;
+  justify-content: flex-start;
+  align-items: center;
+
+  .show__password_button {
+    width: 20px;
+    height: 20px;
+    border: 1px solid #cad2d6;
+    border-radius: 1px;
+    cursor: pointer;
+  }
+
+  .show__password_text {
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 20px;
+    color: #505e68;
+  }
+}
