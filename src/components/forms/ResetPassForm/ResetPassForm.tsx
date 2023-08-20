@@ -8,7 +8,7 @@ import Checkbox from "../../Checkbox/Checkbox";
 import { useState } from "react";
 
 type ResetPassFormProps = {
-  handleShowForm: () => void; // Define the prop type
+  handleShowForm: () => void;
 };
 
 const schema = yup
