@@ -9,7 +9,6 @@ import { useState } from "react";
 
 const schema = yup
   .object({
-    email: yup.string().email("Invalid email").required("Email is required"),
     password: yup
       .string()
       .min(6, "Password must be at least 6 characters")
@@ -25,7 +24,7 @@ const schema = yup
 
 type FormData = yup.InferType<typeof schema>;
 
-const RegisterForm: React.FC = () => {
+const ResetPassForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -50,15 +49,7 @@ const RegisterForm: React.FC = () => {
   return (
     <form className={styles.input__form} onSubmit={handleSubmit(onSubmit)}>
       <Input
-        label="Email"
-        name="email"
-        type="email"
-        placeholder="yourmail@gmail.com"
-        register={register}
-        errors={errors}
-      />
-      <Input
-        label="Password"
+        label="New Password"
         name="password"
         type={showPassword ? "text" : "password"}
         placeholder="password!2"
@@ -74,9 +65,9 @@ const RegisterForm: React.FC = () => {
         errors={errors}
       />
       <Checkbox checked={showPassword} onChange={handleShowPasswordChange} />
-      <SubmitButton buttonText="Register" />
+      <SubmitButton buttonText="Reset" />
     </form>
   );
 };
 
-export default RegisterForm;
+export default ResetPassForm;

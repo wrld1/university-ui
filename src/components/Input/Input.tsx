@@ -11,6 +11,7 @@ interface InputProps<T extends FieldValues> {
   label: string;
   name: string;
   type: string;
+  placeholder: string;
   register: UseFormRegister<T>;
   errors: DeepMap<T, FieldError>;
 }
@@ -19,6 +20,7 @@ const Input: React.FC<InputProps<any>> = ({
   label,
   name,
   type,
+  placeholder,
   register,
   errors,
 }) => {
@@ -40,6 +42,7 @@ const Input: React.FC<InputProps<any>> = ({
         }`}
         id={name}
         type={type}
+        placeholder={placeholder}
         {...register(name)}
       />
       {hasError && (

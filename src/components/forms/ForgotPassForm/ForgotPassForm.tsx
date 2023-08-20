@@ -4,26 +4,16 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Input from "../../Input/Input";
-import Checkbox from "../../Checkbox/Checkbox";
-import { useState } from "react";
 
 const schema = yup
   .object({
     email: yup.string().email("Invalid email").required("Email is required"),
-    password: yup
-      .string()
-      .min(6, "Password must be at least 6 characters")
-      .matches(/\d/, "Password must contain a number")
-      .matches(/[^a-zA-Z0-9]/, "Password must contain a special character")
-      .required("Password is required"),
   })
   .required();
 
 type FormData = yup.InferType<typeof schema>;
 
-const LoginForm: React.FC = () => {
-  const [showPassword, setShowPassword] = useState(false);
-
+const ForgotPassForm: React.FC = () => {
   const {
     register,
     handleSubmit,
@@ -39,10 +29,6 @@ const LoginForm: React.FC = () => {
     reset();
   };
 
-  const handleShowPasswordChange = () => {
-    setShowPassword(!showPassword);
-  };
-
   return (
     <form className={styles.input__form} onSubmit={handleSubmit(onSubmit)}>
       <Input
@@ -53,18 +39,9 @@ const LoginForm: React.FC = () => {
         placeholder="yourmail@gmail.com"
         errors={errors}
       />
-      <Input
-        label="Password"
-        name="password"
-        type={showPassword ? "text" : "password"}
-        placeholder="password!2"
-        register={register}
-        errors={errors}
-      />
-      <Checkbox checked={showPassword} onChange={handleShowPasswordChange} />
-      <SubmitButton buttonText="Login" />
+      <SubmitButton buttonText="Reset" />
     </form>
   );
 };
 
-export default LoginForm;
+export default ForgotPassForm;
