@@ -1,5 +1,5 @@
 import { useRouteError } from "react-router-dom";
-import styles from "../../../styles/pages/errorPage.module.scss";
+import styles from "../../styles/pages/errorPage.module.scss";
 
 const ErrorPage: React.FC = () => {
   const error: unknown = useRouteError();

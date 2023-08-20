@@ -1,7 +1,7 @@
-import styles from "../../../styles/pages/authPage.module.scss";
-import AuthLayout from "../../AuthLayout/AuthLayout";
-import FormTitle from "../../FormTitle/FormTitle";
-import ForgotPassForm from "../../forms/ForgotPassForm/ForgotPassForm";
+import styles from "../../styles/pages/authPage.module.scss";
+import AuthLayout from "../../components/AuthLayout/AuthLayout";
+import FormTitle from "../../components/FormTitle/FormTitle";
+import ForgotPassForm from "../../components/forms/ForgotPassForm/ForgotPassForm";
 import { Link } from "react-router-dom";
 
 const ForgotPassPage: React.FC = () => {

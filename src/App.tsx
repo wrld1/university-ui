@@ -1,10 +1,10 @@
 import styles from "./styles/pages/errorPage.module.scss";
-import RegisterPage from "./components/pages/RegisterPage";
+import RegisterPage from "./pages/RegisterPage";
 import { Navigate, Route, Routes } from "react-router-dom";
-import LoginPage from "./components/pages/LoginPage";
-import ErrorPage from "./components/pages/ErrorPage";
-import ForgotPassPage from "./components/pages/ForgotPassPage";
-import ResetPassPage from "./components/pages/ResetPassPage";
+import LoginPage from "./pages/LoginPage";
+import ErrorPage from "./pages/ErrorPage";
+import ForgotPassPage from "./pages/ForgotPassPage";
+import ResetPassPage from "./pages/ResetPassPage";
 
 function App() {
   return (

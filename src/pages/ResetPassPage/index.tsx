@@ -1,10 +1,10 @@
-import styles from "../../../styles/pages/authPage.module.scss";
+import styles from "../../styles/pages/authPage.module.scss";
 import React, { useState } from "react";
-import AuthLayout from "../../AuthLayout/AuthLayout";
-import ResetPassForm from "../../forms/ResetPassForm/ResetPassForm";
-import FormTitle from "../../FormTitle/FormTitle";
+import AuthLayout from "../../components/AuthLayout/AuthLayout";
+import ResetPassForm from "../../components/forms/ResetPassForm/ResetPassForm";
+import FormTitle from "../../components/FormTitle/FormTitle";
 import { Link } from "react-router-dom";
-import SubmitButton from "../../SubmitButton/SubmitButton";
+import SubmitButton from "../../components/SubmitButton/SubmitButton";
 
 const ResetPassPage: React.FC = () => {
   const [showForm, setShowForm] = useState(true);
