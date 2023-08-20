@@ -1,4 +1,4 @@
-import styles from "./ForgotPassPage.module.scss";
+import styles from "../../../styles/pages/authPage.module.scss";
 import AuthLayout from "../../AuthLayout/AuthLayout";
 import FormTitle from "../../FormTitle/FormTitle";
 import ForgotPassForm from "../../forms/ForgotPassForm/ForgotPassForm";

@@ -1,4 +1,4 @@
-import styles from "./App.module.scss";
+import styles from "./styles/pages/errorPage.module.scss";
 import RegisterPage from "./components/pages/RegisterPage";
 import { Navigate, Route, Routes } from "react-router-dom";
 import LoginPage from "./components/pages/LoginPage";
@@ -22,8 +22,9 @@ function App() {
         <Route
           path="*"
           element={
-            <div>
-              <h2>404 Page not found</h2>
+            <div id="error-page" className={styles.wrapper}>
+              <h1>Oops!</h1>
+              <p>Sorry, an unexpected error has occurred.</p>
             </div>
           }
         />

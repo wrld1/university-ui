@@ -7,6 +7,10 @@ import Input from "../../Input/Input";
 import Checkbox from "../../Checkbox/Checkbox";
 import { useState } from "react";
 
+type ResetPassFormProps = {
+  handleShowForm: () => void; // Define the prop type
+};
+
 const schema = yup
   .object({
     password: yup
@@ -24,7 +28,7 @@ const schema = yup
 
 type FormData = yup.InferType<typeof schema>;
 
-const ResetPassForm: React.FC = () => {
+const ResetPassForm: React.FC<ResetPassFormProps> = ({ handleShowForm }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -40,6 +44,7 @@ const ResetPassForm: React.FC = () => {
   const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log(data);
     reset();
+    handleShowForm();
   };
 
   const handleShowPasswordChange = () => {

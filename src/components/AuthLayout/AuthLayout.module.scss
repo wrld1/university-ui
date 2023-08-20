@@ -19,6 +19,9 @@
     .nav__links {
       display: flex;
       gap: 32px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
 
       a:hover {
         color: $color-purple;

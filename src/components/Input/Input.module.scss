@@ -4,6 +4,7 @@
   width: 376px;
   display: flex;
   flex-direction: column;
+  position: relative;
 
   &:focus-within .input__label {
     color: $color-purple;
@@ -40,12 +41,19 @@
 
     &--error {
       border-color: red;
+      transition: border-color 0.3s ease;
     }
   }
   .error__message {
-    margin-top: 6px;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 4px;
     font-size: 14px;
     font-weight: 500;
     color: #da1b41;
+    background-color: #f399ab21;
+    padding: 1px 3px;
+    border-radius: 2px;
   }
 }

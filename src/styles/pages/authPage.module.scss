@@ -1,4 +1,10 @@
-@import "../../../styles/variables.scss";
+@import "../variables.scss";
+
+.reset__page--container {
+  .subtitle {
+    text-align: center;
+  }
+}
 
 .subtitle {
   font-size: 19px;
@@ -13,4 +19,8 @@
   color: #2c343a;
   font-size: 16px;
   font-weight: 500;
+
+  &:hover {
+    color: $color-purple;
+  }
 }
