@@ -1,7 +1,13 @@
+@import "../../styles/variables.scss";
+
 .input__container {
   width: 376px;
   display: flex;
   flex-direction: column;
+
+  &:focus-within .input__label {
+    color: $color-purple;
+  }
 
   .input__label {
     font-weight: 400;
@@ -9,6 +15,10 @@
     line-height: 24px;
     color: #505e68;
     margin-bottom: 4px;
+
+    &--error {
+      color: red;
+    }
   }
 
   .input__field {
@@ -19,14 +29,19 @@
     font-size: 15px;
     line-height: 24px;
     color: #000;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
     &:focus {
       outline: none;
-      border-color: #505e68;
+      border: 1px solid $color-purple;
       box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);
     }
+
+    &--error {
+      border-color: red;
+    }
   }
-  .input__error {
+  .error__message {
     margin-top: 6px;
     font-size: 14px;
     font-weight: 500;

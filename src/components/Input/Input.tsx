@@ -1,49 +1,52 @@
-import React, { InputHTMLAttributes } from "react";
+import React from "react";
 import {
-  Path,
-  useForm,
   UseFormRegister,
-  SubmitHandler,
   DeepMap,
   FieldValues,
   FieldError,
 } from "react-hook-form";
 import styles from "./Input.module.scss";
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
-  name: string;
+interface InputProps<T extends FieldValues> {
   label: string;
-  register: UseFormRegister<FieldValues>;
+  name: string;
   type: string;
-  errors: DeepMap<FieldValues, FieldError>;
-  validationSchema?: any;
+  register: UseFormRegister<T>;
+  errors: DeepMap<T, FieldError>;
 }
 
-const Input: React.FC<InputProps> = ({
-  name,
+const Input: React.FC<InputProps<any>> = ({
   label,
+  name,
+  type,
   register,
-  type = "text",
   errors,
-  validationSchema,
-}) => (
-  <div className={styles.input__container}>
-    <label className={styles.input__label} htmlFor={name}>
-      {label}
-    </label>
-    <input
-      className={styles.input__field}
-      id={name}
-      type={type}
-      {...register(name, validationSchema)}
-    />
-    {errors && errors[name]?.type === "required" && (
-      <span className={styles.input__error}>{errors[name]?.message}</span>
-    )}
-    {errors && errors[name]?.type === "minLength" && (
-      <span className={styles.input__error}>{errors[name]?.message}</span>
-    )}
-  </div>
-);
+}) => {
+  const hasError = errors[name] !== undefined;
+
+  return (
+    <div className={styles.input__container}>
+      <label
+        className={`${styles.input__label}${
+          hasError ? ` ${styles["input__label--error"]}` : ""
+        }`}
+        htmlFor={name}
+      >
+        {label}
+      </label>
+      <input
+        className={`${styles.input__field}${
+          hasError ? ` ${styles["input__field--error"]}` : ""
+        }`}
+        id={name}
+        type={type}
+        {...register(name)}
+      />
+      {hasError && (
+        <span className={styles.error__message}>{errors[name]?.message}</span>
+      )}
+    </div>
+  );
+};
 
 export default Input;
