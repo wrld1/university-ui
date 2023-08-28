@@ -1,0 +1,24 @@
+@import "../../styles/variables.scss";
+
+.wrapper {
+  display: flex;
+
+  font-family: $nunito-font-family;
+
+  .dashboard__aside {
+    background-color: #3f1e85;
+    min-width: 260px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: content-box;
+    min-height: 100vh;
+
+    &--header {
+      min-height: 72px;
+      padding: 15px 30px;
+      display: flex;
+      justify-content: flex-start;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import styles from "./AuthLayout.module.scss";
-import Logo from "../Logo/Logo";
+import Logo from "../../components/Logo/Logo";
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
 

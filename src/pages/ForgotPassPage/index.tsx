@@ -1,5 +1,5 @@
 import styles from "../../styles/pages/authPage.module.scss";
-import AuthLayout from "../../components/AuthLayout/AuthLayout";
+import AuthLayout from "../../layouts/AuthLayout/AuthLayout";
 import FormTitle from "../../components/FormTitle/FormTitle";
 import ForgotPassForm from "../../components/forms/ForgotPassForm/ForgotPassForm";
 import { Link } from "react-router-dom";

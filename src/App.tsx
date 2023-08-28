@@ -5,6 +5,7 @@ import LoginPage from "./pages/LoginPage";
 import ErrorPage from "./pages/ErrorPage";
 import ForgotPassPage from "./pages/ForgotPassPage";
 import ResetPassPage from "./pages/ResetPassPage";
+import LectorsPage from "./pages/LectorsPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/sign-in" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPassPage />} />
         <Route path="/reset-password" element={<ResetPassPage />} />
+        <Route path="/lectors" element={<LectorsPage />} />
         <Route
           path="*"
           element={

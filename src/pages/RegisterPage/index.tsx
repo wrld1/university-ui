@@ -1,5 +1,5 @@
 import React from "react";
-import AuthLayout from "../../components/AuthLayout/AuthLayout";
+import AuthLayout from "../../layouts/AuthLayout/AuthLayout";
 import RegisterForm from "../../components/forms/RegisterForm/RegisterForm";
 import FormTitle from "../../components/FormTitle/FormTitle";
 

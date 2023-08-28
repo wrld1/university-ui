@@ -1,10 +1,17 @@
 import styles from "./Logo.module.scss";
 import logo from "../../assets/images/Logo.png";
+import dashboardLogo from "../../assets/images/DashboardLogo.png";
 
-const Logo = () => {
+interface LogoProps {
+  dashboard?: boolean;
+}
+
+const Logo: React.FC<LogoProps> = ({ dashboard }) => {
+  const logoSrc = dashboard ? dashboardLogo : logo;
+  const logoClass = dashboard ? styles.dashboardLogo : styles.logo;
   return (
     <div>
-      <img className={styles.logo} src={logo} alt="Logo" />
+      <img className={logoClass} src={logoSrc} alt="Logo" />
     </div>
   );
 };

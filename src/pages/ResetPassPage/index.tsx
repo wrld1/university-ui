@@ -1,6 +1,6 @@
 import styles from "../../styles/pages/authPage.module.scss";
 import React, { useState } from "react";
-import AuthLayout from "../../components/AuthLayout/AuthLayout";
+import AuthLayout from "../../layouts/AuthLayout/AuthLayout";
 import ResetPassForm from "../../components/forms/ResetPassForm/ResetPassForm";
 import FormTitle from "../../components/FormTitle/FormTitle";
 import { Link } from "react-router-dom";
