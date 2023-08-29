@@ -6,6 +6,9 @@ import ErrorPage from "./pages/ErrorPage";
 import ForgotPassPage from "./pages/ForgotPassPage";
 import ResetPassPage from "./pages/ResetPassPage";
 import LectorsPage from "./pages/LectorsPage";
+import CoursesPage from "./pages/CoursesPage";
+import GroupsPage from "./pages/GroupsPage";
+import StudentsPage from "./pages/StudentsPage";
 
 function App() {
   return (
@@ -20,7 +23,11 @@ function App() {
         <Route path="/sign-in" element={<LoginPage />} />
         <Route path="/forgot-password" element={<ForgotPassPage />} />
         <Route path="/reset-password" element={<ResetPassPage />} />
+        <Route path="/courses" element={<CoursesPage />} />
         <Route path="/lectors" element={<LectorsPage />} />
+        <Route path="/groups" element={<GroupsPage />} />
+        <Route path="/students" element={<StudentsPage />} />
+
         <Route
           path="*"
           element={

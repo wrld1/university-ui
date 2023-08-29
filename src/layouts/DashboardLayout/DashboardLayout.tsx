@@ -1,23 +1,20 @@
 import styles from "./DashboardLayout.module.scss";
-import Logo from "../../components/Logo/Logo";
-import { ReactNode } from "react";
-import AsideLinkContainer from "./components/Aside/AsideLinkContainer";
+import Aside from "./components/Aside/Aside";
+import Main from "./components/Main/Main";
+import Header from "./components/Header/Header";
 
 interface DashboardLayoutProps {
   heading: string;
 }
 
-const DashboardLayout: React.FC<DashboardLayoutProps> = ({
-  heading: Lectors,
-}) => {
+const DashboardLayout: React.FC<DashboardLayoutProps> = ({ heading }) => {
   return (
     <div className={styles.wrapper}>
-      <aside className={styles.dashboard__aside}>
-        <div className={styles["dashboard__aside--header"]}>
-          <Logo dashboard />
-        </div>
-        <AsideLinkContainer />
-      </aside>
+      <Aside />
+      <div className={styles.content__wrapper}>
+        <Header heading={heading} />
+        <Main />
+      </div>
     </div>
   );
 };

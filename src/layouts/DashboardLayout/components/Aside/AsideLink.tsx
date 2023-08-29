@@ -40,7 +40,7 @@ const AsideLink: React.FC<AsideLinkProps> = ({ name }) => {
     <Link to={`/${name.toLowerCase()}`} className={wrapperClasses}>
       <div className={styles.aside__link}>
         <div className={styles.icon__block}>{<Icon />}</div>
-        {name}
+        <span>{name}</span>
       </div>
     </Link>
   );

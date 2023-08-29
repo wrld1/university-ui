@@ -1,14 +1,13 @@
+import ActionsPanel from "./ActionsPanel";
+import ContentWrapper from "./ContentWrapper";
 import styles from "./Main.module.scss";
 
-interface MainProps {
-  heading: string;
-}
-
-const Main: React.FC<MainProps> = ({ heading }) => {
+const Main: React.FC = () => {
   return (
-    <div className={styles.main__wrapper}>
-      <div className={styles.main__header}>{heading}</div>
-    </div>
+    <main className={styles.main__wrapper}>
+      <ActionsPanel />
+      <ContentWrapper />
+    </main>
   );
 };
 
