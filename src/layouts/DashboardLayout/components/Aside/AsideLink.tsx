@@ -9,11 +9,7 @@ import { ReactComponent as CoursesIcon } from "../../../../assets/icons/CoursesI
 
 type Name = "Dashboard" | "Lectors" | "Groups" | "Students" | "Courses";
 
-type IconComponents = {
-  [key in Name]: React.FunctionComponent<React.SVGProps<SVGSVGElement>>;
-};
-
-const iconComponents: IconComponents = {
+const iconComponents = {
   Dashboard: DashboardIcon,
   Courses: CoursesIcon,
   Lectors: LectorsIcon,
