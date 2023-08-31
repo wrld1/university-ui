@@ -6,6 +6,11 @@ import * as yup from "yup";
 import Input from "../../Input/Input";
 import Checkbox from "../../Checkbox/Checkbox";
 import { useState } from "react";
+import { signIn } from "../../../api/auth.api";
+import { useAppDispatch } from "../../../utils/hooks/useAppDispatch";
+import { getUsersReq } from "../../../redux/users/action.creators";
+import { setCredentials } from "../../../redux/auth/auth.slice";
+import { useNavigate } from "react-router-dom";
 
 const schema = yup
   .object({
@@ -23,6 +28,8 @@ type FormData = yup.InferType<typeof schema>;
 
 const LoginForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -34,9 +41,20 @@ const LoginForm: React.FC = () => {
     mode: "onChange",
   });
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
     console.log(data);
-    reset();
+    try {
+      const response = await signIn(data);
+
+      localStorage.setItem("accessToken", response.data.accessToken);
+      const userResponse = await dispatch(getUsersReq());
+      dispatch(setCredentials(userResponse.payload));
+
+      navigate("/lectors");
+      reset();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleShowPasswordChange = () => {

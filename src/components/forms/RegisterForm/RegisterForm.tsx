@@ -3,9 +3,13 @@ import SubmitButton from "../../SubmitButton/SubmitButton";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Input from "../../Input/Input";
 import Checkbox from "../../Checkbox/Checkbox";
-import { useState } from "react";
+import { signUp } from "../../../api/auth.api";
+import { useAppDispatch } from "../../../utils/hooks/useAppDispatch";
+import { setCredentials } from "../../../redux/auth/auth.slice";
 
 const schema = yup
   .object({
@@ -27,6 +31,8 @@ type FormData = yup.InferType<typeof schema>;
 
 const RegisterForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -38,9 +44,22 @@ const RegisterForm: React.FC = () => {
     mode: "onChange",
   });
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
-    reset();
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    try {
+      const response = await signUp({
+        email: data.email,
+        password: data.password,
+      });
+
+      const { accessToken } = response.data;
+      localStorage.setItem("accessToken", accessToken);
+      dispatch(setCredentials(accessToken));
+      console.log(accessToken);
+      navigate("/");
+      reset();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const handleShowPasswordChange = () => {

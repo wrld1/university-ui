@@ -7,7 +7,7 @@ const ActionsPanel: React.FC = () => {
       <label className={styles.actions__label} htmlFor="sort">
         Sort By
       </label>
-      <select name="sort" id="sort">
+      <select className={styles.select__button} name="sort" id="sort">
         <option value="all">all</option>
         <option value="1">A-Z</option>
         <option value="2">Z-A</option>

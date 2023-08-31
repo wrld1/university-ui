@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { getUsersApi } from "../../api/auth.api";
 
-export const getUsersReq = createAsyncThunk("/users", async (thunkAPI) => {
+export const getUsersReq = createAsyncThunk("/users/me", async (thunkAPI) => {
   console.log("!!!!!!", thunkAPI);
   const response = await getUsersApi();
 

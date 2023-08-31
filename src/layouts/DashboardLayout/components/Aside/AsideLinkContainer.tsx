@@ -1,5 +1,6 @@
 import AsideLink from "./AsideLink";
 import styles from "../Aside/Aside.module.scss";
+import Logout from "./Logout";
 
 const AsideLinkContainer: React.FC = () => {
   return (
@@ -11,7 +12,7 @@ const AsideLinkContainer: React.FC = () => {
         <AsideLink name="Groups" />
         <AsideLink name="Students" />
       </div>
-      <div className={styles["dashboard__aside--logout"]}>Log Out</div>
+      <Logout />
     </div>
   );
 };

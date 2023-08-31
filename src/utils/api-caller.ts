@@ -13,13 +13,13 @@ type ExpandedAxiosRequestConfig = AxiosRequestConfig & {
 };
 
 const getToken = () => {
-  return "token";
+  return localStorage.getItem("accessToken");
 };
 
 export const apiCaller = async (
   opts: ExpandedAxiosRequestConfig = {}
 ): Promise<AxiosResponse> => {
-  const { url = null, method = "get", params = {}, data = null } = opts;
+  const { url = null, method = "GET", params = {}, data = null } = opts;
   const headers: RawAxiosRequestHeaders = {};
 
   headers["Content-Type"] = "application/json";
@@ -27,7 +27,7 @@ export const apiCaller = async (
   const token = getToken();
 
   if (!isNil(token)) {
-    headers["Authorization"] = `JWT ${token}`;
+    headers["Authorization"] = `Bearer ${token}`;
   }
 
   const requestURL = `http://localhost:3010${url}`;

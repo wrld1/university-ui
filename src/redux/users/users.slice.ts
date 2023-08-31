@@ -16,7 +16,6 @@ const usersSlice = createSlice({
       .addCase(getUsersReq.pending, (state, action) => {
         console.log(state);
         console.log(action);
-
         state.loading = true;
       })
       .addCase(getUsersReq.fulfilled, (state, action) => {
@@ -31,6 +30,6 @@ const usersSlice = createSlice({
   },
 });
 
-export const {} = usersSlice.actions;
+// export const {} = usersSlice.actions;
 
 export default usersSlice.reducer;
