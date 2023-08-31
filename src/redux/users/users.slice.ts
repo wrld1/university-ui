@@ -21,10 +21,6 @@ const usersSlice = createSlice({
       .addCase(getUsersReq.fulfilled, (state, action) => {
         console.log("result list", action);
         const newEntities = {};
-        // action.payload.forEach(todo => {
-        //   newEntities[todo.id] = todo
-        // })
-        // state.entities = newEntities
         state.loading = false;
       });
   },

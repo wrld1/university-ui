@@ -10,7 +10,8 @@ const ContentWrapper: React.FC = () => {
         <span className={styles["content__column--name"]}>Email</span>
         <span className={styles["content__column--name"]}>Password</span>
       </div>
-      <div>
+      <div className={styles["content__rows--wrapper"]}>
+        <ContentRow />
         <ContentRow />
       </div>
     </>

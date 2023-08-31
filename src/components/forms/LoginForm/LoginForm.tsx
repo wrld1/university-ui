@@ -49,7 +49,6 @@ const LoginForm: React.FC = () => {
       localStorage.setItem("accessToken", response.data.accessToken);
       const userResponse = await dispatch(getUsersReq());
       dispatch(setCredentials(userResponse.payload));
-
       navigate("/lectors");
       reset();
     } catch (error) {
