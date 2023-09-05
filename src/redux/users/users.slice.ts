@@ -20,7 +20,7 @@ const usersSlice = createSlice({
       })
       .addCase(getUsersReq.fulfilled, (state, action) => {
         console.log("result list", action);
-        const newEntities = {};
+        // const newEntities = {};
         state.loading = false;
       });
   },

@@ -9,7 +9,7 @@ import Input from "../../Input/Input";
 import Checkbox from "../../Checkbox/Checkbox";
 import { signUp } from "../../../api/auth.api";
 import { useAppDispatch } from "../../../utils/hooks/useAppDispatch";
-import { setCredentials } from "../../../redux/auth/auth.slice";
+import { login } from "../../../redux/auth/auth.slice";
 
 const schema = yup
   .object({
@@ -53,7 +53,7 @@ const RegisterForm: React.FC = () => {
 
       const { accessToken } = response.data;
       localStorage.setItem("accessToken", accessToken);
-      dispatch(setCredentials(accessToken));
+      dispatch(login(accessToken));
       console.log(accessToken);
       navigate("/");
       reset();

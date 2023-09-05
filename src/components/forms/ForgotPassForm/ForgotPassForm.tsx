@@ -4,7 +4,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Input from "../../Input/Input";
-import { useNavigate } from "react-router-dom";
+
+import { resetPassRequest } from "../../../api/auth.api";
 
 const schema = yup
   .object({
@@ -15,8 +16,6 @@ const schema = yup
 type FormData = yup.InferType<typeof schema>;
 
 const ForgotPassForm: React.FC = () => {
-  const navigate = useNavigate();
-
   const {
     register,
     handleSubmit,
@@ -27,11 +26,17 @@ const ForgotPassForm: React.FC = () => {
     mode: "onChange",
   });
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
-    reset();
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    try {
+      const response = await resetPassRequest({
+        email: data.email,
+      });
 
-    navigate("/reset-password");
+      console.log(response);
+      reset();
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (

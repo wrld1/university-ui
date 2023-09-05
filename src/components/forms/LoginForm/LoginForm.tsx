@@ -9,7 +9,7 @@ import { useState } from "react";
 import { signIn } from "../../../api/auth.api";
 import { useAppDispatch } from "../../../utils/hooks/useAppDispatch";
 import { getUsersReq } from "../../../redux/users/action.creators";
-import { setCredentials } from "../../../redux/auth/auth.slice";
+import { login } from "../../../redux/auth/auth.slice";
 import { useNavigate } from "react-router-dom";
 
 const schema = yup
@@ -48,7 +48,7 @@ const LoginForm: React.FC = () => {
 
       localStorage.setItem("accessToken", response.data.accessToken);
       const userResponse = await dispatch(getUsersReq());
-      dispatch(setCredentials(userResponse.payload));
+      dispatch(login(userResponse.payload));
       navigate("/lectors");
       reset();
     } catch (error) {

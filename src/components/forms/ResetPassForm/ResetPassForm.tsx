@@ -6,6 +6,8 @@ import * as yup from "yup";
 import Input from "../../Input/Input";
 import Checkbox from "../../Checkbox/Checkbox";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
+import { resetPass } from "../../../api/auth.api";
 
 type ResetPassFormProps = {
   handleShowForm: () => void;
@@ -41,8 +43,19 @@ const ResetPassForm: React.FC<ResetPassFormProps> = ({ handleShowForm }) => {
     mode: "onChange",
   });
 
+  const location = useLocation();
+
+  const searchParams = new URLSearchParams(location.search);
+  const tokenParam = searchParams.get("token");
+  const token: string | null = tokenParam !== null ? tokenParam : "";
+  const idParam = searchParams.get("id");
+  const id: string | null = idParam !== null ? idParam : "";
+
   const onSubmit: SubmitHandler<FormData> = (data) => {
     console.log(data);
+    console.log(token);
+    console.log(id);
+    resetPass(data, token, id);
     reset();
     handleShowForm();
   };
