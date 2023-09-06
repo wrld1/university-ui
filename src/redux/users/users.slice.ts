@@ -14,12 +14,10 @@ const usersSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getUsersReq.pending, (state, action) => {
-        console.log(state);
         console.log(action);
         state.loading = true;
       })
       .addCase(getUsersReq.fulfilled, (state, action) => {
-        console.log("result list", action);
         // const newEntities = {};
         state.loading = false;
       });

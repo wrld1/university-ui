@@ -9,6 +9,7 @@ import CoursesPage from "../pages/CoursesPage";
 import LectorsPage from "../pages/LectorsPage";
 import GroupsPage from "../pages/GroupsPage";
 import StudentsPage from "../pages/StudentsPage";
+import AuthWrapper from "../components/AuthWrapper/AuthWrapper";
 
 const routerRoot = createBrowserRouter([
   {
@@ -33,23 +34,43 @@ const routerRoot = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    element: <DashboardPage />,
+    element: (
+      <AuthWrapper>
+        <DashboardPage />
+      </AuthWrapper>
+    ),
   },
   {
     path: "courses",
-    element: <CoursesPage />,
+    element: (
+      <AuthWrapper>
+        <CoursesPage />
+      </AuthWrapper>
+    ),
   },
   {
     path: "lectors",
-    element: <LectorsPage />,
+    element: (
+      <AuthWrapper>
+        <LectorsPage />
+      </AuthWrapper>
+    ),
   },
   {
     path: "groups",
-    element: <GroupsPage />,
+    element: (
+      <AuthWrapper>
+        <GroupsPage />
+      </AuthWrapper>
+    ),
   },
   {
     path: "students",
-    element: <StudentsPage />,
+    element: (
+      <AuthWrapper>
+        <StudentsPage />
+      </AuthWrapper>
+    ),
   },
   {
     path: "*",

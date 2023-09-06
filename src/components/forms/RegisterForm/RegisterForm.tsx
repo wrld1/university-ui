@@ -1,10 +1,11 @@
 import styles from "../../../styles/forms/authForm.module.scss";
-import SubmitButton from "../../SubmitButton/SubmitButton";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import SubmitButton from "../../SubmitButton/SubmitButton";
 import Input from "../../Input/Input";
 import Checkbox from "../../Checkbox/Checkbox";
 import { signUp } from "../../../api/auth.api";
@@ -55,10 +56,11 @@ const RegisterForm: React.FC = () => {
       localStorage.setItem("accessToken", accessToken);
       dispatch(login(accessToken));
       console.log(accessToken);
+      toast.success("Successful registration");
       navigate("/");
       reset();
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      toast.error(`There is an error: ${error.response.data.message}`);
     }
   };
 

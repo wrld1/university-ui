@@ -3,14 +3,15 @@ import SubmitButton from "../../SubmitButton/SubmitButton";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import Input from "../../Input/Input";
-import Checkbox from "../../Checkbox/Checkbox";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import Checkbox from "../../Checkbox/Checkbox";
+import Input from "../../Input/Input";
 import { signIn } from "../../../api/auth.api";
 import { useAppDispatch } from "../../../utils/hooks/useAppDispatch";
 import { getUsersReq } from "../../../redux/users/action.creators";
 import { login } from "../../../redux/auth/auth.slice";
-import { useNavigate } from "react-router-dom";
 
 const schema = yup
   .object({
@@ -42,17 +43,18 @@ const LoginForm: React.FC = () => {
   });
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    console.log(data);
     try {
       const response = await signIn(data);
 
       localStorage.setItem("accessToken", response.data.accessToken);
       const userResponse = await dispatch(getUsersReq());
+      console.log(userResponse);
       dispatch(login(userResponse.payload));
+      toast.success("Successful login");
       navigate("/lectors");
       reset();
-    } catch (error) {
-      console.error(error);
+    } catch (error: any) {
+      toast.error(`There is an error: ${error.response.data.message}`);
     }
   };
 

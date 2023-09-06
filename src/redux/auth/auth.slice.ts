@@ -3,12 +3,16 @@ import { RootState } from "../store";
 
 const authSlice = createSlice({
   name: "auth",
-  initialState: { isAuthenticated: false, user: null, token: null },
+  initialState: {
+    isAuthenticated: !!localStorage.getItem("accessToken"),
+    user: null,
+    token: localStorage.getItem("accessToken") || null,
+  },
   reducers: {
     login: (state, action) => {
-      const { user, accessToken } = action.payload;
+      const { email, accessToken } = action.payload;
       state.isAuthenticated = true;
-      state.user = user;
+      state.user = email;
       state.token = accessToken;
     },
     logOut: (state) => {
