@@ -11,7 +11,7 @@ interface InputProps<T extends FieldValues> {
   label: string;
   name: string;
   type: string;
-  placeholder: string;
+  placeholder: any;
   register: UseFormRegister<T>;
   errors: DeepMap<T, FieldError>;
 }

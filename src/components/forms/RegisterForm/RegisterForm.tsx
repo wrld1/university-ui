@@ -1,16 +1,16 @@
-import styles from "../../../styles/forms/authForm.module.scss";
+import styles from "../../../styles/forms/Form.module.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
-import SubmitButton from "../../SubmitButton/SubmitButton";
+import Button from "../../Button/Button";
 import Input from "../../Input/Input";
 import Checkbox from "../../Checkbox/Checkbox";
 import { signUp } from "../../../api/auth.api";
 import { useAppDispatch } from "../../../utils/hooks/useAppDispatch";
-import { login } from "../../../redux/auth/auth.slice";
+import { setAccessToken } from "../../../redux/auth/auth.slice";
 
 const schema = yup
   .object({
@@ -54,7 +54,7 @@ const RegisterForm: React.FC = () => {
 
       const { accessToken } = response.data;
       localStorage.setItem("accessToken", accessToken);
-      dispatch(login(accessToken));
+      dispatch(setAccessToken(accessToken));
       console.log(accessToken);
       toast.success("Successful registration");
       navigate("/");
@@ -95,7 +95,7 @@ const RegisterForm: React.FC = () => {
         errors={errors}
       />
       <Checkbox checked={showPassword} onChange={handleShowPasswordChange} />
-      <SubmitButton buttonText="Register" />
+      <Button buttonText="Register" type="submit" />
     </form>
   );
 };

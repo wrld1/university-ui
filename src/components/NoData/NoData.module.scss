@@ -1,0 +1,15 @@
+.nodata__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  font-weight: 700;
+  font-size: 24px;
+
+  .nodata__img {
+    max-width: 75%;
+    max-height: 75%;
+  }
+}

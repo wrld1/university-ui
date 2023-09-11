@@ -1,5 +1,5 @@
-import styles from "../../../styles/forms/authForm.module.scss";
-import SubmitButton from "../../SubmitButton/SubmitButton";
+import styles from "../../../styles/forms/Form.module.scss";
+import Button from "../../Button/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -83,7 +83,7 @@ const ResetPassForm: React.FC<ResetPassFormProps> = ({ handleShowForm }) => {
         errors={errors}
       />
       <Checkbox checked={showPassword} onChange={handleShowPasswordChange} />
-      <SubmitButton buttonText="Reset" />
+      <Button buttonText="Reset" type="submit" />
     </form>
   );
 };

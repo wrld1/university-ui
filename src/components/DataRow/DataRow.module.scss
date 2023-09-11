@@ -1,0 +1,37 @@
+.content__row {
+  background-color: #fff;
+  border-radius: 6px;
+  padding: 16px 18px 16px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .edit__button {
+    cursor: pointer;
+  }
+
+  .edit__icon path {
+    fill: #bbb0c8;
+    transition: fill 0.3s;
+  }
+
+  .edit__button:hover .edit__icon path {
+    fill: #7101ff;
+  }
+}
+
+.content__row--data {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0;
+}
+
+.content__column {
+  padding: 8px;
+}
+
+.content__property--name {
+  font-weight: 700;
+  font-size: 16px;
+  color: #111112;
+}

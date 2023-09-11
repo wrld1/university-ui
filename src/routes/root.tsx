@@ -10,6 +10,7 @@ import LectorsPage from "../pages/LectorsPage";
 import GroupsPage from "../pages/GroupsPage";
 import StudentsPage from "../pages/StudentsPage";
 import AuthWrapper from "../components/AuthWrapper/AuthWrapper";
+import DetailedStudentPage from "../pages/StudentsPage/DetailedStudentPage";
 
 const routerRoot = createBrowserRouter([
   {
@@ -48,6 +49,14 @@ const routerRoot = createBrowserRouter([
       </AuthWrapper>
     ),
   },
+  // {
+  //   path: "courses/:id",
+  //   element: (
+  //     <AuthWrapper>
+  //       <DetailedCoursePage />
+  //     </AuthWrapper>
+  //   ),
+  // },
   {
     path: "lectors",
     element: (
@@ -56,6 +65,14 @@ const routerRoot = createBrowserRouter([
       </AuthWrapper>
     ),
   },
+  // {
+  //   path: "lectors/:id",
+  //   element: (
+  //     <AuthWrapper>
+  //       <DetailedLectorPage />
+  //     </AuthWrapper>
+  //   ),
+  // },
   {
     path: "groups",
     element: (
@@ -64,11 +81,27 @@ const routerRoot = createBrowserRouter([
       </AuthWrapper>
     ),
   },
+  // {
+  //   path: "groups/:id",
+  //   element: (
+  //     <AuthWrapper>
+  //       <DetailedGroupPage />
+  //     </AuthWrapper>
+  //   ),
+  // },
   {
     path: "students",
     element: (
       <AuthWrapper>
         <StudentsPage />
+      </AuthWrapper>
+    ),
+  },
+  {
+    path: "students/:id",
+    element: (
+      <AuthWrapper>
+        <DetailedStudentPage />
       </AuthWrapper>
     ),
   },

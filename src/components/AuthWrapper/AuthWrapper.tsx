@@ -18,20 +18,22 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
 
   const currentPathname = location.pathname;
 
-  useEffect(() => {
-    const fetchAuth = async () => {
-      await checkAuthentication();
-    };
+  const fetchAuth = async () => {
+    await checkAuthentication();
+  };
 
+  useEffect(() => {
     fetchAuth();
+
     if (!isAuthenticated) {
       toast.error("You need to authorize first to access this page!");
       navigate("/sign-in");
       console.log("Navigating to /sign-in");
       return;
     }
+
     //eslint-disable-next-line
-  }, [isAuthenticated, currentPathname]);
+  }, [currentPathname]);
 
   return <>{children}</>;
 };

@@ -1,5 +1,5 @@
 import { apiCaller } from "../../utils/api-caller";
-import { login, logOut } from "./auth.slice";
+import { logOut, setIsAuthenticated } from "./auth.slice";
 import { useAppDispatch } from "../../utils/hooks/useAppDispatch";
 import toast from "react-hot-toast";
 
@@ -10,7 +10,7 @@ export const useCheckAuthentication = () => {
     try {
       const response = await apiCaller({
         method: "GET",
-        url: "/auth/is-authenticated",
+        url: "/auth/authenticated",
       });
 
       console.log("check auth is tut");
@@ -19,7 +19,7 @@ export const useCheckAuthentication = () => {
         toast.error(`You need to sign in again`);
         dispatch(logOut());
       } else if (response.status === 200) {
-        dispatch(login({ isAuthenticated: response.data.authenticated }));
+        dispatch(setIsAuthenticated({ isAuthenticated: true }));
       } else {
         console.log("smth has happened and I don't know what");
       }

@@ -1,5 +1,5 @@
-import styles from "../../../styles/forms/authForm.module.scss";
-import SubmitButton from "../../SubmitButton/SubmitButton";
+import styles from "../../../styles/forms/Form.module.scss";
+import Button from "../../Button/Button";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -11,7 +11,7 @@ import Input from "../../Input/Input";
 import { signIn } from "../../../api/auth.api";
 import { useAppDispatch } from "../../../utils/hooks/useAppDispatch";
 import { getUsersReq } from "../../../redux/users/action.creators";
-import { login } from "../../../redux/auth/auth.slice";
+import { setIsAuthenticated, setUser } from "../../../redux/auth/auth.slice";
 
 const schema = yup
   .object({
@@ -49,7 +49,8 @@ const LoginForm: React.FC = () => {
       localStorage.setItem("accessToken", response.data.accessToken);
       const userResponse = await dispatch(getUsersReq());
       console.log(userResponse);
-      dispatch(login(userResponse.payload));
+      dispatch(setUser(userResponse.payload));
+      dispatch(setIsAuthenticated(true));
       toast.success("Successful login");
       navigate("/lectors");
       reset();
@@ -81,7 +82,7 @@ const LoginForm: React.FC = () => {
         errors={errors}
       />
       <Checkbox checked={showPassword} onChange={handleShowPasswordChange} />
-      <SubmitButton buttonText="Login" />
+      <Button buttonText="Login" type="submit" />
     </form>
   );
 };
