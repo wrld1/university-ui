@@ -3,7 +3,7 @@ import DashboardLayout from "../../layouts/DashboardLayout/DashboardLayout";
 
 const DashboardPage: React.FC = () => {
   return (
-    <DashboardLayout heading="Lectors">
+    <DashboardLayout heading="Dashboard">
       <MainContent />
     </DashboardLayout>
   );

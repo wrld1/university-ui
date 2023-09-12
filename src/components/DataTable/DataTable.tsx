@@ -13,17 +13,21 @@ import { StudentPageData } from "../../types/Student.interface";
 import { selectGroupPageData } from "../../redux/groups/groups.slice";
 import { selectStudentPageData } from "../../redux/students/students.slice";
 import ReactPaginate from "react-paginate";
+import { selectSearchValue } from "../../redux/search/search.slice";
+import { useDataFilter } from "../../utils/hooks/useDataFilter";
+
+type PageData =
+  | LectorPageData
+  | CoursePageData
+  | GroupPageData
+  | StudentPageData;
+
+export type DataType = PageData[];
 
 const DataTable: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   const pageType: PageType = useAppSelector(selectPageType);
-
-  type DataType =
-    | LectorPageData[]
-    | CoursePageData[]
-    | GroupPageData[]
-    | StudentPageData[];
 
   const dataMappings: Record<PageType, DataType> = {
     lectors: useAppSelector(selectLectorPageData),
@@ -35,10 +39,14 @@ const DataTable: React.FC = () => {
   const itemsPerPage = 10;
   const offset = currentPage * itemsPerPage;
 
-  const dataForStyles: DataType = dataMappings[pageType] || [];
+  const searchValue = useAppSelector(selectSearchValue);
 
-  const data: DataType =
-    dataMappings[pageType]?.slice(offset, offset + itemsPerPage) || [];
+  const filteredData = useDataFilter(dataMappings, searchValue, pageType);
+
+  const data = filteredData.slice(offset, offset + itemsPerPage);
+  const pageCount = Math.ceil(filteredData.length / itemsPerPage);
+
+  console.log(data);
 
   const handlePageChange = (selectedPage: { selected: number }) => {
     setCurrentPage(selectedPage.selected);
@@ -60,23 +68,29 @@ const DataTable: React.FC = () => {
     (maxWidths, header) => {
       const headerTextWidth = header.length * 10;
       const dataTextWidth = Math.max(
-        ...dataForStyles.map((row) => {
+        ...(dataMappings[pageType]?.map((row) => {
           const typedRow = row as LectorPageData | CoursePageData;
-          return String(typedRow[header as keyof typeof typedRow]).length * 10;
-        })
+          const cellValue = String(typedRow[header as keyof typeof typedRow]);
+          const cellWidth = cellValue.length * 10;
+          return cellWidth;
+        }) || [])
       );
+
       maxWidths[header] = Math.max(headerTextWidth, dataTextWidth);
+
       return maxWidths;
     },
     {} as Record<string, number>
   );
 
-  const columnTemplate = headers
-    .map((header) => `${columnMaxWidths[header]}px`)
-    .join(" ");
+  const columnWidths: Record<string, string> = {};
+
+  for (const header in columnMaxWidths) {
+    columnWidths[header] = `${columnMaxWidths[header]}px`;
+  }
 
   const columnStyles = {
-    gridTemplateColumns: columnTemplate,
+    gridTemplateColumns: Object.values(columnWidths).join(" "),
     gridGap: `${reducedGap}px`,
   };
 
@@ -99,7 +113,7 @@ const DataTable: React.FC = () => {
           previousLabel={"← Previous"}
           nextLabel={"Next →"}
           breakLabel={"..."}
-          pageCount={Math.ceil(dataMappings[pageType]?.length / itemsPerPage)}
+          pageCount={Math.ceil(pageCount)}
           marginPagesDisplayed={2}
           pageRangeDisplayed={5}
           onPageChange={handlePageChange}

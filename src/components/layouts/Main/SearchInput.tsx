@@ -2,21 +2,29 @@ import styles from "./Main.module.scss";
 import { useDebounce } from "../../../utils/hooks/useDebounce";
 import { ReactComponent as SearchIcon } from "../../../assets/icons/SearchIcon.svg";
 import { ChangeEvent, useEffect, useState } from "react";
+import { useAppDispatch } from "../../../utils/hooks/useAppDispatch";
+import { useAppSelector } from "../../../utils/hooks/useAppSelector";
+import {
+  selectSearchValue,
+  setSearchValue,
+} from "../../../redux/search/search.slice";
 
 const SearchInput: React.FC = () => {
-  const [searchvalue, setSearchValue] = useState<string>("");
-  const debouncedValue = useDebounce<string>(searchvalue, 500);
+  const dispatch = useAppDispatch();
+  const searchValue = useAppSelector(selectSearchValue);
+  const [displayedSearchValue, setDisplayedSearchValue] = useState<string>("");
+
+  const debouncedSearchValue = useDebounce(displayedSearchValue, 500);
+
+  useEffect(() => {
+    if (searchValue !== debouncedSearchValue) {
+      dispatch(setSearchValue(debouncedSearchValue));
+    }
+  }, [debouncedSearchValue, dispatch, searchValue]);
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setSearchValue(event.target.value);
-    handleSearch(searchvalue);
-  };
-
-  useEffect(() => {}, [debouncedValue]);
-
-  const handleSearch = (searchvalue: string) => {
-    //there will be a function that retrieves data based on searchValue
-    console.log("its called");
+    const typedValue = event.target.value;
+    setDisplayedSearchValue(typedValue);
   };
 
   return (
@@ -28,7 +36,7 @@ const SearchInput: React.FC = () => {
         className={styles.search__input}
         type="text"
         placeholder="Search"
-        value={searchvalue}
+        value={displayedSearchValue}
         onChange={handleChange}
       />
     </div>

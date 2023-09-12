@@ -1,7 +1,6 @@
 import { apiCaller } from "../../utils/api-caller";
 import { logOut, setIsAuthenticated } from "./auth.slice";
 import { useAppDispatch } from "../../utils/hooks/useAppDispatch";
-import toast from "react-hot-toast";
 
 export const useCheckAuthentication = () => {
   const dispatch = useAppDispatch();
@@ -16,7 +15,6 @@ export const useCheckAuthentication = () => {
       console.log("check auth is tut");
 
       if (response.status === 401) {
-        toast.error(`You need to sign in again`);
         dispatch(logOut());
       } else if (response.status === 200) {
         dispatch(setIsAuthenticated({ isAuthenticated: true }));

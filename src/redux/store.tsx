@@ -7,6 +7,7 @@ import lectorsSlice from "./lectors/lectors.slice";
 import coursesSlice from "./courses/courses.slice";
 import studentsSlice from "./students/students.slice";
 import groupsSlice from "./groups/groups.slice";
+import searchSlice from "./search/search.slice";
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     courses: coursesSlice,
     students: studentsSlice,
     groups: groupsSlice,
+    search: searchSlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   devTools: true,
