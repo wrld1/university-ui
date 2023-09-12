@@ -1,6 +1,6 @@
 import styles from "./DashboardLayout.module.scss";
-import Aside from "../../components/layouts/Aside/Aside";
-import Header from "../../components/layouts/Header/Header";
+import Aside from "../../components/LayoutsComponents/Aside/Aside";
+import Header from "../../components/LayoutsComponents/Header/Header";
 import { memo } from "react";
 
 interface DashboardLayoutProps {

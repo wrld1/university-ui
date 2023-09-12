@@ -8,7 +8,8 @@ import Button from "../../Button/Button";
 import Input from "../../Input/Input";
 import Checkbox from "../../Checkbox/Checkbox";
 import FormTitle from "../../FormTitle/FormTitle";
-import { createLector } from "../../../api/lectors.api";
+import { createLector, getLectors } from "../../../api/lectors.api";
+import useFetchLectorsData from "../../../pages/LectorsPage/useFetchLectorsData";
 
 export type AddLectorFormProps = {
   onClose: () => void;
@@ -30,6 +31,7 @@ const schema = yup
 type FormData = yup.InferType<typeof schema>;
 
 const AddLectorForm: React.FC<AddLectorFormProps> = ({ onClose }) => {
+  const fetchLectorsData = useFetchLectorsData(getLectors);
   const [showPassword, setShowPassword] = useState(false);
 
   const {
@@ -52,6 +54,7 @@ const AddLectorForm: React.FC<AddLectorFormProps> = ({ onClose }) => {
 
       console.log(response);
       toast.success("Lector created successfully");
+      fetchLectorsData();
       reset();
       onClose();
     } catch (error: any) {

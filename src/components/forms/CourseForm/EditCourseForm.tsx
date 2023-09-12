@@ -7,12 +7,11 @@ import styles from "../../../styles/forms/Form.module.scss";
 import Button from "../../Button/Button";
 import Input from "../../Input/Input";
 import FormTitle from "../../FormTitle/FormTitle";
-import { useAppDispatch } from "../../../utils/hooks/useAppDispatch";
-import { setModal } from "../../../redux/modal/modal.slice";
 import { useAppSelector } from "../../../utils/hooks/useAppSelector";
 import { selectLectorApiData } from "../../../redux/lectors/lectors.slice";
 import { CourseApiResponse } from "../../../types/Course.interface";
-import { editCourse } from "../../../api/courses.api";
+import { editCourse, getCourses } from "../../../api/courses.api";
+import useFetchCoursesData from "../../../pages/CoursesPage/useFetchCoursesData";
 
 interface CourseFormData {
   name?: string;
@@ -40,9 +39,8 @@ const EditCourseForm: React.FC<EditCourseFormProps> = ({
   onClose,
 }) => {
   const courseData: CourseApiResponse[] = useAppSelector(selectLectorApiData);
+  const fetchCourses = useFetchCoursesData(getCourses);
   const currentCourse = courseData.find((item) => item.id === entityId);
-
-  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -80,9 +78,9 @@ const EditCourseForm: React.FC<EditCourseFormProps> = ({
       const response = await editCourse(entityId, editedData);
       console.log(response);
       toast.success("Data edited successfully");
+      fetchCourses();
       reset();
       onClose();
-      dispatch(setModal(false));
     } catch (error: any) {
       toast.error(`There is an error: ${error.response.data.message}`);
     }

@@ -7,7 +7,8 @@ import styles from "../../../styles/forms/Form.module.scss";
 import Button from "../../Button/Button";
 import Input from "../../Input/Input";
 import FormTitle from "../../FormTitle/FormTitle";
-import { createGroup } from "../../../api/groups.api";
+import { createGroup, getGroups } from "../../../api/groups.api";
+import useFetchGroupsData from "../../../pages/GroupsPage/useFetchGroupsData";
 
 export type AddGroupFormProps = {
   onClose: () => void;
@@ -20,6 +21,7 @@ const schema = yup.object().shape({
 type FormData = yup.InferType<typeof schema>;
 
 const AddGroupForm: React.FC<AddGroupFormProps> = ({ onClose }) => {
+  const fetchGroupsData = useFetchGroupsData(getGroups);
   const {
     register,
     handleSubmit,
@@ -38,6 +40,7 @@ const AddGroupForm: React.FC<AddGroupFormProps> = ({ onClose }) => {
 
       console.log(response);
       toast.success("Group created successfully");
+      fetchGroupsData();
       reset();
       onClose();
     } catch (error: any) {

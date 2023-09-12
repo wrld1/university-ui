@@ -1,38 +1,48 @@
 import { DataRowProps } from "../components/DataRow/DataRow";
 
-export const isDeepEqual = (object1: any, object2: any) => {
-  const objKeys1 = Object.keys(object1);
-  const objKeys2 = Object.keys(object2);
-
-  if (objKeys1.length !== objKeys2.length) return false;
-
-  for (var key of objKeys1) {
-    const value1 = object1[key];
-    const value2 = object2[key];
-
-    const isObjects = isObject(value1) && isObject(value2);
-
-    if (
-      (isObjects && !isDeepEqual(value1, value2)) ||
-      (!isObjects && value1 !== value2)
-    ) {
-      return false;
-    }
-  }
-  return true;
-};
-const isObject = (object: any) => {
-  return object != null && typeof object === "object";
-};
-
-export const areEqual = (prevProps: DataRowProps, nextProps: DataRowProps) => {
-  if (!isDeepEqual(prevProps.data, nextProps.data)) {
+function deepEqual(objA: any, objB: any): boolean {
+  if (typeof objA !== typeof objB) {
     return false;
   }
 
-  return (
-    prevProps.style.gridTemplateColumns ===
-      nextProps.style.gridTemplateColumns &&
-    prevProps.style.gridGap === nextProps.style.gridGap
-  );
-};
+  if (typeof objA !== "object" || objA === null) {
+    return objA === objB;
+  }
+
+  if (Array.isArray(objA)) {
+    if (!Array.isArray(objB) || objA.length !== objB.length) {
+      return false;
+    }
+
+    for (let i = 0; i < objA.length; i++) {
+      if (!deepEqual(objA[i], objB[i])) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  const keysA = Object.keys(objA);
+  const keysB = Object.keys(objB);
+
+  if (keysA.length !== keysB.length) {
+    return false;
+  }
+
+  for (const key of keysA) {
+    if (!keysB.includes(key) || !deepEqual(objA[key], objB[key])) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+export function areEqual(prevProps: DataRowProps, nextProps: DataRowProps) {
+  const isDataEqual = deepEqual(prevProps.data, nextProps.data);
+
+  const isStyleEqual = deepEqual(prevProps.style, nextProps.style);
+
+  return isDataEqual && isStyleEqual;
+}

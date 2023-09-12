@@ -7,12 +7,11 @@ import styles from "../../../styles/forms/Form.module.scss";
 import Button from "../../Button/Button";
 import Input from "../../Input/Input";
 import FormTitle from "../../FormTitle/FormTitle";
-import { useAppDispatch } from "../../../utils/hooks/useAppDispatch";
-import { setModal } from "../../../redux/modal/modal.slice";
 import { useAppSelector } from "../../../utils/hooks/useAppSelector";
 import { selectStudentApiData } from "../../../redux/students/students.slice";
 import { StudentApiResponse } from "../../../types/Student.interface";
-import { editStudent } from "../../../api/students.api";
+import { editStudent, getStudents } from "../../../api/students.api";
+import useFetchStudentsData from "../../../pages/StudentsPage/useFetchStudentsData";
 
 interface StudentFormData {
   name?: string;
@@ -58,9 +57,8 @@ const EditStudentForm: React.FC<EditStudentFormProps> = ({
 }) => {
   const studentData: StudentApiResponse[] =
     useAppSelector(selectStudentApiData);
+  const fetchStudentsData = useFetchStudentsData(getStudents);
   const currentStudent = studentData.find((item) => item.id === entityId);
-
-  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -98,9 +96,9 @@ const EditStudentForm: React.FC<EditStudentFormProps> = ({
       const response = await editStudent(entityId, editedData);
       console.log(response);
       toast.success("Data edited successfully");
+      fetchStudentsData();
       reset();
       onClose();
-      dispatch(setModal(false));
     } catch (error: any) {
       toast.error(`There is an error: ${error.response.data.message}`);
     }

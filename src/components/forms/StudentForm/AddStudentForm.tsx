@@ -7,7 +7,8 @@ import styles from "../../../styles/forms/Form.module.scss";
 import Button from "../../Button/Button";
 import Input from "../../Input/Input";
 import FormTitle from "../../FormTitle/FormTitle";
-import { createStudent } from "../../../api/students.api";
+import { createStudent, getStudents } from "../../../api/students.api";
+import useFetchStudentsData from "../../../pages/StudentsPage/useFetchStudentsData";
 
 export type AddStudentFormProps = {
   onClose: () => void;
@@ -29,6 +30,7 @@ const schema = yup.object().shape({
 type FormData = yup.InferType<typeof schema>;
 
 const AddStudentForm: React.FC<AddStudentFormProps> = ({ onClose }) => {
+  const fetchStudentsData = useFetchStudentsData(getStudents);
   const {
     register,
     handleSubmit,
@@ -41,7 +43,7 @@ const AddStudentForm: React.FC<AddStudentFormProps> = ({ onClose }) => {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     try {
-      const response = await createStudent({
+      await createStudent({
         name: data.name,
         surname: data.surname,
         email: data.email,
@@ -49,8 +51,8 @@ const AddStudentForm: React.FC<AddStudentFormProps> = ({ onClose }) => {
         imagePath: data.imagePath,
       });
 
-      console.log(response);
       toast.success("Student created successfully");
+      fetchStudentsData();
       reset();
       onClose();
     } catch (error: any) {

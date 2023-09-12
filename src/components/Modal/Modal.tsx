@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, memo } from "react";
 import styles from "./Modal.module.scss";
 import { ReactComponent as CloseIcon } from "../../assets/icons/CloseIcon.svg";
 
@@ -20,4 +20,9 @@ const Modal: React.FC<ModalProps> = ({ children, onClose }) => {
   );
 };
 
-export default Modal;
+export default memo(Modal, (prevProps, nextProps) => {
+  return (
+    prevProps.children === nextProps.children &&
+    prevProps.onClose === nextProps.onClose
+  );
+});

@@ -8,12 +8,11 @@ import Button from "../../Button/Button";
 import Input from "../../Input/Input";
 import Checkbox from "../../Checkbox/Checkbox";
 import FormTitle from "../../FormTitle/FormTitle";
-import { editLector } from "../../../api/lectors.api";
-import { useAppDispatch } from "../../../utils/hooks/useAppDispatch";
-import { setModal } from "../../../redux/modal/modal.slice";
+import { editLector, getLectors } from "../../../api/lectors.api";
 import { LectorApiResponse } from "../../../types/Lector.interface";
 import { useAppSelector } from "../../../utils/hooks/useAppSelector";
 import { selectLectorApiData } from "../../../redux/lectors/lectors.slice";
+import useFetchLectorsData from "../../../pages/LectorsPage/useFetchLectorsData";
 
 interface LectorFormData {
   name?: string;
@@ -51,9 +50,8 @@ const EditLectorForm: React.FC<EditLectorFormProps> = ({
 }) => {
   const [showPassword, setShowPassword] = useState(false);
   const lectorData: LectorApiResponse[] = useAppSelector(selectLectorApiData);
+  const fetchLectorsData = useFetchLectorsData(getLectors);
   const currentLector = lectorData.find((item) => item.id === entityId);
-
-  const dispatch = useAppDispatch();
 
   const {
     register,
@@ -93,7 +91,7 @@ const EditLectorForm: React.FC<EditLectorFormProps> = ({
       toast.success("Data edited successfully");
       reset();
       onClose();
-      dispatch(setModal(false));
+      fetchLectorsData();
     } catch (error: any) {
       toast.error(`There is an error: ${error.response.data.message}`);
     }

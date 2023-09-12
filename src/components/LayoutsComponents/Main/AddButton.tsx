@@ -5,7 +5,7 @@ import Modal from "../../Modal/Modal";
 import AddLectorForm, {
   AddLectorFormProps,
 } from "../../forms/LectorForm/AddLectorForm";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { PageType } from "../../../types/PageType.type";
 import AddCourseForm, {
   AddCourseFormProps,
@@ -36,15 +36,15 @@ const AddButton: React.FC = () => {
     students: AddStudentForm,
   };
 
-  const openModal = () => {
+  const openModal = useCallback(() => {
     setIsModalOpen(true);
     document.body.classList.add("modal__open");
-  };
+  }, []);
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setIsModalOpen(false);
     document.body.classList.remove("modal__open");
-  };
+  }, []);
 
   const currentPathname = location.pathname;
 

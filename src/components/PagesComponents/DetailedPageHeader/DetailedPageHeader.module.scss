@@ -1,0 +1,23 @@
+.header {
+  background-color: #f8f8f8;
+  border-bottom: 1px solid #dee0e5;
+  padding: 15px 36px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 72px;
+  width: 100%;
+
+  .header__logo {
+    cursor: pointer;
+    height: 42px;
+    width: 42px;
+  }
+
+  .header__title {
+    font-weight: 700;
+    font-size: 24px;
+    color: #111112;
+    text-transform: capitalize;
+  }
+}

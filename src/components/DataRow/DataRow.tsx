@@ -1,8 +1,7 @@
-import React, { memo, useState } from "react";
+import React, { memo, useCallback, useState } from "react";
 import styles from "./DataRow.module.scss";
 import { ReactComponent as EditIcon } from "../../assets/icons/EditIcon.svg";
 import Modal from "../Modal/Modal";
-
 import { areEqual } from "../../utils/memoCompare";
 import EditLectorForm, {
   EditLectorFormProps,
@@ -52,15 +51,15 @@ const DataRow: React.FC<DataRowProps> = ({ data, style }) => {
   count++;
   console.log("component render number: ", count);
 
-  const openModal = () => {
+  const openModal = useCallback(() => {
     setIsModalOpen(true);
     document.body.classList.add("modal__open");
-  };
+  }, []);
 
-  const closeModal = () => {
+  const closeModal = useCallback(() => {
     setIsModalOpen(false);
     document.body.classList.remove("modal__open");
-  };
+  }, []);
 
   const FormComponent = formComponents[pageType];
 

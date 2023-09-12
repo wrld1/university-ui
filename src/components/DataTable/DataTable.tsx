@@ -1,20 +1,17 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import DataRow from "../DataRow/DataRow";
 import { useAppSelector } from "../../utils/hooks/useAppSelector";
 import styles from "./DataTable.module.scss";
-import { selectLectorPageData } from "../../redux/lectors/lectors.slice";
 import { LectorPageData } from "../../types/Lector.interface";
 import { selectPageType } from "../../redux/data/data.slice";
 import { PageType } from "../../types/PageType.type";
-import { selectCoursePageData } from "../../redux/courses/courses.slice";
 import { CoursePageData } from "../../types/Course.interface";
 import { GroupPageData } from "../../types/Group.interface";
 import { StudentPageData } from "../../types/Student.interface";
-import { selectGroupPageData } from "../../redux/groups/groups.slice";
-import { selectStudentPageData } from "../../redux/students/students.slice";
-import ReactPaginate from "react-paginate";
 import { selectSearchValue } from "../../redux/search/search.slice";
 import { useDataFilter } from "../../utils/hooks/useDataFilter";
+import DataTablePagination from "../DataTablePagination/DataTablePagination";
+import { useDataMappings } from "../../utils/hooks/useDataMappings";
 
 type PageData =
   | LectorPageData
@@ -28,25 +25,22 @@ const DataTable: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(0);
 
   const pageType: PageType = useAppSelector(selectPageType);
+  const searchValue = useAppSelector(selectSearchValue);
+  const memoizedSearchValue = useMemo(() => searchValue, [searchValue]);
 
-  const dataMappings: Record<PageType, DataType> = {
-    lectors: useAppSelector(selectLectorPageData),
-    courses: useAppSelector(selectCoursePageData),
-    groups: useAppSelector(selectGroupPageData),
-    students: useAppSelector(selectStudentPageData),
-  };
+  const dataMappings = useDataMappings();
+
+  const filteredData = useDataFilter(
+    dataMappings,
+    memoizedSearchValue,
+    pageType
+  );
 
   const itemsPerPage = 10;
   const offset = currentPage * itemsPerPage;
 
-  const searchValue = useAppSelector(selectSearchValue);
-
-  const filteredData = useDataFilter(dataMappings, searchValue, pageType);
-
   const data = filteredData.slice(offset, offset + itemsPerPage);
   const pageCount = Math.ceil(filteredData.length / itemsPerPage);
-
-  console.log(data);
 
   const handlePageChange = (selectedPage: { selected: number }) => {
     setCurrentPage(selectedPage.selected);
@@ -69,7 +63,11 @@ const DataTable: React.FC = () => {
       const headerTextWidth = header.length * 10;
       const dataTextWidth = Math.max(
         ...(dataMappings[pageType]?.map((row) => {
-          const typedRow = row as LectorPageData | CoursePageData;
+          const typedRow = row as
+            | LectorPageData
+            | CoursePageData
+            | GroupPageData
+            | StudentPageData;
           const cellValue = String(typedRow[header as keyof typeof typedRow]);
           const cellWidth = cellValue.length * 10;
           return cellWidth;
@@ -109,19 +107,9 @@ const DataTable: React.FC = () => {
         ))}
       </div>
       {data.length > 0 && (
-        <ReactPaginate
-          previousLabel={"← Previous"}
-          nextLabel={"Next →"}
-          breakLabel={"..."}
-          pageCount={Math.ceil(pageCount)}
-          marginPagesDisplayed={2}
-          pageRangeDisplayed={5}
-          onPageChange={handlePageChange}
-          containerClassName={styles.pagination}
-          previousLinkClassName={styles.pagination__link}
-          nextLinkClassName={styles.pagination__link}
-          disabledClassName={styles["pagination__link--disabled"]}
-          activeClassName={styles["pagination__link--active"]}
+        <DataTablePagination
+          pageCount={pageCount}
+          handlePageChange={handlePageChange}
         />
       )}
     </>

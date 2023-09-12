@@ -1,4 +1,4 @@
-import MainContent from "../../components/layouts/Main/MainContent";
+import MainContent from "../../components/LayoutsComponents/Main/MainContent";
 import DashboardLayout from "../../layouts/DashboardLayout/DashboardLayout";
 
 const DashboardPage: React.FC = () => {

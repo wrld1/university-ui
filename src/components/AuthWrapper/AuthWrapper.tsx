@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import toast from "react-hot-toast";
 import { useAppSelector } from "../../utils/hooks/useAppSelector";
 import { selectCurrentAuthStatus } from "../../redux/auth/auth.slice";
 import { useCheckAuthentication } from "../../redux/auth/auth.actions";
@@ -26,7 +25,7 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
     fetchAuth();
 
     if (!isAuthenticated) {
-      toast.error("You need to authorize first to access this page!");
+      // toast.error("You need to authorize first to access this page!");
       navigate("/sign-in");
       console.log("Navigating to /sign-in");
       return;

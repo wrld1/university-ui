@@ -7,7 +7,8 @@ import styles from "../../../styles/forms/Form.module.scss";
 import Button from "../../Button/Button";
 import Input from "../../Input/Input";
 import FormTitle from "../../FormTitle/FormTitle";
-import { createCourse } from "../../../api/courses.api";
+import { createCourse, getCourses } from "../../../api/courses.api";
+import useFetchCoursesData from "../../../pages/CoursesPage/useFetchCoursesData";
 
 export type AddCourseFormProps = {
   onClose: () => void;
@@ -26,6 +27,7 @@ const schema = yup.object().shape({
 type FormData = yup.InferType<typeof schema>;
 
 const AddCourseForm: React.FC<AddCourseFormProps> = ({ onClose }) => {
+  const fetchCourses = useFetchCoursesData(getCourses);
   const {
     register,
     handleSubmit,
@@ -46,6 +48,7 @@ const AddCourseForm: React.FC<AddCourseFormProps> = ({ onClose }) => {
 
       console.log(response);
       toast.success("Course created successfully");
+      fetchCourses();
       reset();
       onClose();
     } catch (error: any) {

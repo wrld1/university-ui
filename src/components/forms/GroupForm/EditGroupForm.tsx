@@ -7,12 +7,11 @@ import styles from "../../../styles/forms/Form.module.scss";
 import Button from "../../Button/Button";
 import Input from "../../Input/Input";
 import FormTitle from "../../FormTitle/FormTitle";
-import { useAppDispatch } from "../../../utils/hooks/useAppDispatch";
-import { setModal } from "../../../redux/modal/modal.slice";
 import { useAppSelector } from "../../../utils/hooks/useAppSelector";
 import { selectLectorApiData } from "../../../redux/lectors/lectors.slice";
 import { GroupApiResponse } from "../../../types/Group.interface";
-import { editGroup } from "../../../api/groups.api";
+import { editGroup, getGroups } from "../../../api/groups.api";
+import useFetchGroupsData from "../../../pages/GroupsPage/useFetchGroupsData";
 
 interface GroupFormData {
   name?: string;
@@ -30,8 +29,7 @@ const schema = yup.object().shape({
 const EditGroupForm: React.FC<EditGroupFormProps> = ({ entityId, onClose }) => {
   const groupData: GroupApiResponse[] = useAppSelector(selectLectorApiData);
   const currentGroup = groupData.find((item) => item.id === entityId);
-
-  const dispatch = useAppDispatch();
+  const fetchGroupsData = useFetchGroupsData(getGroups);
 
   const {
     register,
@@ -71,7 +69,7 @@ const EditGroupForm: React.FC<EditGroupFormProps> = ({ entityId, onClose }) => {
       toast.success("Data edited successfully");
       reset();
       onClose();
-      dispatch(setModal(false));
+      fetchGroupsData();
     } catch (error: any) {
       toast.error(`There is an error: ${error.response.data.message}`);
     }
