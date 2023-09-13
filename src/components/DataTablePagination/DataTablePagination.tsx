@@ -12,7 +12,7 @@ const DataTablePagination: React.FC<DataTablePaginationProps> = ({
   handlePageChange,
 }) => (
   <ReactPaginate
-    previousLabel={"← Previous"}
+    previousLabel={"← Prev"}
     nextLabel={"Next →"}
     breakLabel={"..."}
     pageCount={Math.ceil(pageCount)}

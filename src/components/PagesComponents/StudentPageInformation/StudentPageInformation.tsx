@@ -34,13 +34,16 @@ const schema = yup.object().shape({
       "is-valid-age",
       "Age must be a positive integer if provided",
       (value) => {
-        if (!value || value === "") {
+        const ageValue =
+          typeof value === "string" ? parseInt(value, 10) : value;
+
+        if (!ageValue || ageValue === "") {
           return true;
         }
-        if (typeof value !== "number") {
+        if (typeof ageValue !== "number") {
           return false;
         }
-        return value > 0 && Number.isInteger(value);
+        return ageValue > 0 && Number.isInteger(ageValue);
       }
     )
     .nullable(),
