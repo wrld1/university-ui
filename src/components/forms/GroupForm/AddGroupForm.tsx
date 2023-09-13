@@ -34,7 +34,7 @@ const AddGroupForm: React.FC<AddGroupFormProps> = ({ onClose }) => {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     try {
-      const response = await createGroup({
+      await createGroup({
         name: data.name,
       });
 

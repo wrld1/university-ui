@@ -28,7 +28,7 @@ const ForgotPassForm: React.FC = () => {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     try {
-      const response = await resetPassRequest({
+      await resetPassRequest({
         email: data.email,
       });
 

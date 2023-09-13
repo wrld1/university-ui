@@ -64,7 +64,7 @@ const EditGroupForm: React.FC<EditGroupFormProps> = ({ entityId, onClose }) => {
         return;
       }
 
-      const response = await editGroup(entityId, editedData);
+      await editGroup(entityId, editedData);
       toast.success("Data edited successfully");
       reset();
       onClose();

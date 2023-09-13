@@ -40,7 +40,7 @@ const AddCourseForm: React.FC<AddCourseFormProps> = ({ onClose }) => {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     try {
-      const response = await createCourse({
+      await createCourse({
         name: data.name,
         description: data.description,
         hours: Number(data.hours),

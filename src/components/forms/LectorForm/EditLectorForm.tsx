@@ -86,7 +86,7 @@ const EditLectorForm: React.FC<EditLectorFormProps> = ({
         return;
       }
 
-      const response = await editLector(entityId, editedData);
+      await editLector(entityId, editedData);
       toast.success("Data edited successfully");
       reset();
       onClose();

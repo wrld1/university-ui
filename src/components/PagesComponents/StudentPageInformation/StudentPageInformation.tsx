@@ -90,7 +90,7 @@ const StudentPageInformation: React.FC<EditStudentFormProps> = ({
         return;
       }
 
-      const response = await editStudent(studentId, editedData);
+      await editStudent(studentId, editedData);
       toast.success("Data edited successfully");
       fetchStudentsData();
       reset();
