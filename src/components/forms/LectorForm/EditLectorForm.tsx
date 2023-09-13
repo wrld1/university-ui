@@ -87,7 +87,6 @@ const EditLectorForm: React.FC<EditLectorFormProps> = ({
       }
 
       const response = await editLector(entityId, editedData);
-      console.log(response);
       toast.success("Data edited successfully");
       reset();
       onClose();
@@ -95,7 +94,6 @@ const EditLectorForm: React.FC<EditLectorFormProps> = ({
     } catch (error: any) {
       toast.error(`There is an error: ${error.response.data.message}`);
     }
-    console.log("edit onSubmit called");
   };
 
   const handleShowPasswordChange = () => {

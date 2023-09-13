@@ -7,7 +7,6 @@ import { getLectors } from "../../api/lectors.api";
 const RegisterPage: React.FC = () => {
   const someFunc = async () => {
     const result = await getLectors();
-    console.log(result.data);
   };
 
   someFunc();

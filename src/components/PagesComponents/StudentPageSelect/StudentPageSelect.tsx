@@ -50,7 +50,6 @@ const StudentPageSelect: React.FC<StudentPageSelectProps> = ({ studentId }) => {
       const studentResponse = await addGroupToStudent(`${studentId}`, {
         group: selectedOption.value,
       });
-      console.log(studentResponse.data);
       fetchStudentsData();
     }
   };

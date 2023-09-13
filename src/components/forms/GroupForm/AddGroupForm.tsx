@@ -38,7 +38,6 @@ const AddGroupForm: React.FC<AddGroupFormProps> = ({ onClose }) => {
         name: data.name,
       });
 
-      console.log(response);
       toast.success("Group created successfully");
       fetchGroupsData();
       reset();

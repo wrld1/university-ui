@@ -91,14 +91,12 @@ const StudentPageInformation: React.FC<EditStudentFormProps> = ({
       }
 
       const response = await editStudent(studentId, editedData);
-      console.log(response);
       toast.success("Data edited successfully");
       fetchStudentsData();
       reset();
     } catch (error: any) {
       toast.error(`There is an error: ${error.response.data.message}`);
     }
-    console.log("edit onSubmit called");
   };
 
   return (

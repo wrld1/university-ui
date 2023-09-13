@@ -12,7 +12,6 @@ import { useNavigate } from "react-router-dom";
 
 const DetailedStudentPage: React.FC = () => {
   const { studentId = "" } = useParams<{ studentId: string }>();
-  console.log(studentId);
   const loading = useAppSelector(selectLoading);
   const fetchStudentsData = useFetchStudentsData(getStudents);
   const navigate = useNavigate();

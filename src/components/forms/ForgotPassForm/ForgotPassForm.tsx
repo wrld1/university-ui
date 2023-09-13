@@ -32,7 +32,6 @@ const ForgotPassForm: React.FC = () => {
         email: data.email,
       });
 
-      console.log(response);
       reset();
     } catch (error) {
       console.error(error);

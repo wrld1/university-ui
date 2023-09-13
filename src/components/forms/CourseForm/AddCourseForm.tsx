@@ -46,7 +46,6 @@ const AddCourseForm: React.FC<AddCourseFormProps> = ({ onClose }) => {
         hours: Number(data.hours),
       });
 
-      console.log(response);
       toast.success("Course created successfully");
       fetchCourses();
       reset();

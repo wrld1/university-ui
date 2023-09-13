@@ -52,9 +52,6 @@ const ResetPassForm: React.FC<ResetPassFormProps> = ({ handleShowForm }) => {
   const id: string | null = idParam !== null ? idParam : "";
 
   const onSubmit: SubmitHandler<FormData> = (data) => {
-    console.log(data);
-    console.log(token);
-    console.log(id);
     resetPass(data, token, id);
     reset();
     handleShowForm();

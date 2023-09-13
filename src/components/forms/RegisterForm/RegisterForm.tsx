@@ -55,7 +55,6 @@ const RegisterForm: React.FC = () => {
       const { accessToken } = response.data;
       localStorage.setItem("accessToken", accessToken);
       dispatch(setAccessToken(accessToken));
-      console.log(accessToken);
       toast.success("Successful registration");
       navigate("/");
       reset();
