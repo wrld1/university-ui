@@ -7,6 +7,12 @@ export const getGroups = async (): Promise<AxiosResponse> =>
     url: "/groups",
   });
 
+export const getGroupById = async (id: string): Promise<AxiosResponse> =>
+  apiCaller({
+    method: "GET",
+    url: `/groups/${id}`,
+  });
+
 export const createGroup = async (data: any): Promise<AxiosResponse> =>
   apiCaller({
     method: "POST",

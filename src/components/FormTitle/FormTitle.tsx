@@ -8,7 +8,7 @@ interface FormTitleProps {
 const FormTitle: React.FC<FormTitleProps> = ({ title }) => {
   return (
     <div>
-      <h1 className={styles.form__title}>{title}</h1>
+      <h2 className={styles.form__title}>{title}</h2>
     </div>
   );
 };

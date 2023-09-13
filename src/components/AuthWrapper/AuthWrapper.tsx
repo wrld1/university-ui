@@ -9,7 +9,6 @@ type AuthWrapperProps = {
 };
 
 const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
-  console.log("wrapper rendered");
   const isAuthenticated = useAppSelector(selectCurrentAuthStatus);
   const checkAuthentication = useCheckAuthentication();
   const navigate = useNavigate();
@@ -27,7 +26,6 @@ const AuthWrapper: React.FC<AuthWrapperProps> = ({ children }) => {
     if (!isAuthenticated) {
       // toast.error("You need to authorize first to access this page!");
       navigate("/sign-in");
-      console.log("Navigating to /sign-in");
       return;
     }
 

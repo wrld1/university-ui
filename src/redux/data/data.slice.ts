@@ -7,7 +7,7 @@ const dataSlice = createSlice({
   initialState: {
     data: [],
     loading: false,
-    pageType: "lectors",
+    pageType: "",
   },
   reducers: {
     setData: (state, action) => {

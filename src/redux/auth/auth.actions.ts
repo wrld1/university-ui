@@ -12,8 +12,6 @@ export const useCheckAuthentication = () => {
         url: "/auth/authenticated",
       });
 
-      console.log("check auth is tut");
-
       if (response.status === 401) {
         dispatch(logOut());
       } else if (response.status === 200) {

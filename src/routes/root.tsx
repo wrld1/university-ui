@@ -53,7 +53,7 @@ const routerRoot = createBrowserRouter([
     ),
   },
   {
-    path: "courses/:id",
+    path: "courses/:courseId",
     element: (
       <AuthWrapper>
         <DetailedCoursePage />
@@ -69,7 +69,7 @@ const routerRoot = createBrowserRouter([
     ),
   },
   {
-    path: "lectors/:id",
+    path: "lectors/:lectorId",
     element: (
       <AuthWrapper>
         <DetailedLectorPage />
@@ -85,7 +85,7 @@ const routerRoot = createBrowserRouter([
     ),
   },
   {
-    path: "groups/:id",
+    path: "groups/:groupId",
     element: (
       <AuthWrapper>
         <DetailedGroupPage />
@@ -101,7 +101,7 @@ const routerRoot = createBrowserRouter([
     ),
   },
   {
-    path: "students/:id",
+    path: "students/:studentId",
     element: (
       <AuthWrapper>
         <DetailedStudentPage />

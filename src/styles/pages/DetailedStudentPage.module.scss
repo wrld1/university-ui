@@ -1,8 +1,43 @@
+@import "../variables.scss";
+
 .studentPage__wrapper {
   display: flex;
+  position: relative;
   flex-direction: column;
+  height: 100vh;
+
+  .back__button {
+    position: absolute;
+    top: 116px;
+    left: 130px;
+    border: none;
+    background-color: #7101ff;
+    color: white;
+    padding: 12px 24px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 16px;
+    font-family: $lexend-font-family;
+    transition: background-color 0.3s ease-out;
+  }
+
+  .back__button:hover {
+    background-color: #5400d7;
+  }
 
   .studentPage__main--wrapper {
     margin: 0 auto;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .studentPage__main--forms {
+      display: flex;
+      flex-direction: row;
+      justify-content: flex-start;
+      gap: 80px;
+    }
   }
 }

@@ -23,3 +23,13 @@ export const editStudent = async (
     url: `/students/${id}`,
     data: data,
   });
+
+export const addGroupToStudent = async (
+  id: string,
+  data: any
+): Promise<AxiosResponse> =>
+  apiCaller({
+    method: "PUT",
+    url: `/students/${id}/add-group`,
+    data: data,
+  });

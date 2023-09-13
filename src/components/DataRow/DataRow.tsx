@@ -27,7 +27,6 @@ export type DataRowProps = {
     gridGap: string;
   };
 };
-let count = 0;
 
 const DataRow: React.FC<DataRowProps> = ({ data, style }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -47,9 +46,6 @@ const DataRow: React.FC<DataRowProps> = ({ data, style }) => {
     groups: EditGroupForm,
     students: EditStudentForm,
   };
-
-  count++;
-  console.log("component render number: ", count);
 
   const openModal = useCallback(() => {
     setIsModalOpen(true);

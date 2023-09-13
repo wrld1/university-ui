@@ -29,6 +29,7 @@ function useFetchGroupsData(apiFunction: any) {
       dispatch(setGroupPageData(transformedData));
       dispatch(setPageType("groups"));
       dispatch(setLoading(false));
+      return transformedData;
     } catch (error: any) {
       toast.error(`There is an error: ${error.response.data.message}`);
     }
