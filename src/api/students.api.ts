@@ -14,6 +14,12 @@ export const getStudents = async (
     },
   });
 
+export const getStudentById = async (id: string): Promise<AxiosResponse> =>
+  apiCaller({
+    method: "GET",
+    url: `/students/${id}`,
+  });
+
 export const createStudent = async (data: any): Promise<AxiosResponse> =>
   apiCaller({
     method: "POST",
