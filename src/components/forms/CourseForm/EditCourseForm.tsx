@@ -75,8 +75,7 @@ const EditCourseForm: React.FC<EditCourseFormProps> = ({
         return;
       }
 
-      const response = await editCourse(entityId, editedData);
-      console.log(response);
+      await editCourse(entityId, editedData);
       toast.success("Data edited successfully");
       fetchCourses();
       reset();

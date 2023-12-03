@@ -103,7 +103,6 @@ const EditStudentForm: React.FC<EditStudentFormProps> = ({
     } catch (error: any) {
       toast.error(`There is an error: ${error.response.data.message}`);
     }
-    console.log("edit onSubmit called");
   };
 
   return (

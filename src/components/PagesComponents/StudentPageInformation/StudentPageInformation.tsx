@@ -5,13 +5,11 @@ import * as yup from "yup";
 import toast from "react-hot-toast";
 import Button from "../../Button/Button";
 import Input from "../../Input/Input";
-import { selectStudentApiData } from "../../../redux/students/students.slice";
-import { useAppSelector } from "../../../utils/hooks/useAppSelector";
 import { StudentApiResponse } from "../../../types/Student.interface";
-import useFetchStudentsData from "../../../pages/StudentsPage/useFetchStudentsData";
-import { editStudent, getStudents } from "../../../api/students.api";
+import { editStudent, getStudentById } from "../../../api/students.api";
 import FormTitle from "../../FormTitle/FormTitle";
 import ImagePlaceholder from "../../../assets/images/ImagePlaceholder.png";
+import { useEffect, useState } from "react";
 
 interface StudentFormData {
   name?: string;
@@ -52,6 +50,34 @@ const schema = yup.object().shape({
 const StudentPageInformation: React.FC<EditStudentFormProps> = ({
   studentId,
 }) => {
+  const [loading, setLoading] = useState(true);
+  const [student, setStudent] = useState<StudentApiResponse | null>(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const studentData = await getStudentById(studentId);
+        setStudent(studentData.data);
+        setLoading(false);
+      } catch (error: any) {
+        toast.error(`Error fetching student data: ${error.message}`);
+      }
+    };
+
+    fetchData();
+  }, [studentId]);
+
+  useEffect(() => {
+    if (student && student.imagePath && !imageLoaded) {
+      const img = new Image();
+      img.src = `http://localhost:3010/uploads/${student.imagePath}`;
+      img.onload = () => {
+        setImageLoaded(true);
+      };
+    }
+  }, [student, imageLoaded]);
+
   const {
     register,
     handleSubmit,
@@ -61,10 +87,12 @@ const StudentPageInformation: React.FC<EditStudentFormProps> = ({
     resolver: yupResolver(schema) as any,
   });
 
-  const studentData: StudentApiResponse[] =
-    useAppSelector(selectStudentApiData);
-  const fetchStudentsData = useFetchStudentsData(getStudents);
-  const currentStudent = studentData.find((item) => item.id == studentId);
+  const studentPhoto =
+    student && student.imagePath && imageLoaded
+      ? `http://localhost:3010/uploads/${student.imagePath}`
+      : ImagePlaceholder;
+
+  console.log(studentPhoto);
 
   const onSubmit: SubmitHandler<StudentFormData> = async (
     data: StudentFormData
@@ -90,9 +118,8 @@ const StudentPageInformation: React.FC<EditStudentFormProps> = ({
         return;
       }
 
-      const response = await editStudent(studentId, editedData);
+      await editStudent(studentId, editedData);
       toast.success("Data edited successfully");
-      fetchStudentsData();
       reset();
     } catch (error: any) {
       toast.error(`There is an error: ${error.response.data.message}`);
@@ -101,55 +128,73 @@ const StudentPageInformation: React.FC<EditStudentFormProps> = ({
 
   return (
     <div className={styles["edit__form--wrapper"]}>
-      <FormTitle title="Personal information" />
-      <div className={styles.photo__section}>
-        <img src={ImagePlaceholder} alt="Student" />
-        <div className={styles["photo__description--container"]}>
-          <button className={styles["photo__replace--button"]} type="button">
-            Replace
-          </button>
-          <p className={styles["photo__description--text"]}>No file chosen</p>
-          <p className={styles["photo__description--text"]}>
-            Must be a .jpg or .png file smaller than 10MB and at least 400px by
-            400px.
-          </p>
-        </div>
-      </div>
-      <form className={styles.input__form} onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          label="Name"
-          name="name"
-          type="text"
-          placeholder={currentStudent?.name}
-          register={register}
-          errors={errors}
-        />
-        <Input
-          label="Surname"
-          name="surname"
-          type="text"
-          placeholder={currentStudent?.surname}
-          register={register}
-          errors={errors}
-        />
-        <Input
-          label="Email"
-          name="email"
-          type="email"
-          placeholder={currentStudent?.email}
-          register={register}
-          errors={errors}
-        />
-        <Input
-          label="Age"
-          name="age"
-          type="text"
-          placeholder={currentStudent?.age}
-          register={register}
-          errors={errors}
-        />
-        <Button buttonText="Save changes" type="submit" />
-      </form>
+      {loading ? (
+        <div className={styles["photo__section__image"]}>Loading....</div>
+      ) : (
+        <>
+          <FormTitle title="Personal information" />
+          <div className={styles.photo__section}>
+            <img
+              src={studentPhoto}
+              alt="Student"
+              className={styles.photo__section__image}
+            />
+            <div className={styles["photo__description--container"]}>
+              <button
+                className={styles["photo__replace--button"]}
+                type="button"
+              >
+                Replace
+              </button>
+              <p className={styles["photo__description--text"]}>
+                No file chosen
+              </p>
+              <p className={styles["photo__description--text"]}>
+                Must be a .jpg or .png file smaller than 10MB and at least 400px
+                by 400px.
+              </p>
+            </div>
+          </div>
+          <form
+            className={styles.input__form}
+            onSubmit={handleSubmit(onSubmit)}
+          >
+            <Input
+              label="Name"
+              name="name"
+              type="text"
+              placeholder={student?.name || ""}
+              register={register}
+              errors={errors}
+            />
+            <Input
+              label="Surname"
+              name="surname"
+              type="text"
+              placeholder={student?.surname || ""}
+              register={register}
+              errors={errors}
+            />
+            <Input
+              label="Email"
+              name="email"
+              type="email"
+              placeholder={student?.email || ""}
+              register={register}
+              errors={errors}
+            />
+            <Input
+              label="Age"
+              name="age"
+              type="text"
+              placeholder={student?.age || ""}
+              register={register}
+              errors={errors}
+            />
+            <Button buttonText="Save changes" type="submit" />
+          </form>
+        </>
+      )}
     </div>
   );
 };
